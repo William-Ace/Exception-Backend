@@ -30,6 +30,7 @@
     "@nestjs/mongoose": "^9.2.2",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.3.0",
+    "@vercel/node": "^2.10.3",
     "class-validator": "^0.14.0",
     "mongoose": "^7.0.3",
     "reflect-metadata": "^0.1.13",
