@@ -7,9 +7,9 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
-  async createUser(@Body('user') userData: CreateAuthDto): Promise<boolean> {
-    const alreadyExist = this.authService.read(userData.email) === null;
-    if (alreadyExist) return false;
+  async createUser(@Body() userData: CreateAuthDto): Promise<boolean> {
+    const alreadyExist = (await this.authService.read(userData.email)) === null;
+    if (!alreadyExist) return false;
     this.authService
       .create(userData)
       .then((newUser) => {

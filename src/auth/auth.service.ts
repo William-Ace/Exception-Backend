@@ -1,13 +1,13 @@
 import { Model } from 'mongoose';
-import { Injectable, Inject } from '@nestjs/common';
-import { Auth } from './interfaces/auth.interface';
+import { InjectModel } from '@nestjs/mongoose';
+import { Injectable } from '@nestjs/common';
 import { CreateAuthDto } from './dto/create-auth.dto';
+import { Auth } from './schemas/auth.schema';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @Inject('AUTH_MODEL')
-    private authModel: Model<Auth>
+    @InjectModel(Auth.name) private readonly authModel: Model<Auth>
   ) {}
 
   async create(createAuthDto: CreateAuthDto): Promise<Auth> {
