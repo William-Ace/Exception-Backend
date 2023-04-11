@@ -8,8 +8,16 @@ export class AuthController {
 
   @Post('register')
   async createUser(@Body() userData: CreateAuthDto): Promise<boolean> {
-    const alreadyExist = (await this.authService.read(userData.email)) === null;
-    if (!alreadyExist) return false;
+    let alreadyExist;
+
+    try {
+      alreadyExist = await this.authService.read(userData.email);
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+    if (alreadyExist !== null) return false;
+
     this.authService
       .create(userData)
       .then((newUser) => {
